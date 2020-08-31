@@ -1,15 +1,22 @@
 import React from 'react';
 import Input from './Input';
 import TodoItems from './TodoItems';
+import Heading from './Heading';
 import './todo.css';
 import { getDefault, toggleStatus } from './statusIterator';
 
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { todo: [], lastId: 0 };
+    this.state = { todo: [], lastId: 0, heading: 'TODO' };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.updateHeading = this.updateHeading.bind(this);
+  }
+
+  updateHeading(heading) {
+    console.log(heading);
+    this.setState({ heading });
   }
 
   handleKeyPress(todoText) {
@@ -36,9 +43,12 @@ class Todo extends React.Component {
   render() {
     return (
       <div className="todo-box">
-        <h2 contentEditable="true">TODO</h2>
+        <Heading
+          updateHeading={this.updateHeading}
+          heading={this.state.heading}
+        />
         <TodoItems todoList={this.state.todo} onClick={this.handleClick} />
-        <Input value={this.state.input} onKeyPress={this.handleKeyPress} />
+        <Input onKeyPress={this.handleKeyPress} />
       </div>
     );
   }

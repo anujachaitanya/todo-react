@@ -3,7 +3,7 @@ import Input from './Input';
 import TodoItems from './TodoItems';
 import Heading from './Heading';
 import './todo.css';
-import { getDefault, toggleStatus } from './statusIterator';
+import { getDefault, toggleStatus } from './toggleStatus';
 
 class Todo extends React.Component {
   constructor(props) {

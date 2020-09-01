@@ -1,14 +1,14 @@
 const DONE = 'done';
-const WORKING = 'working';
-const UNDONE = 'undone';
+const DOING = 'doing';
+const TODO = 'todo';
 
 const toggle = {
-  [DONE]: UNDONE,
-  [UNDONE]: WORKING,
-  [WORKING]: DONE,
+  [DONE]: TODO,
+  [TODO]: DOING,
+  [DOING]: DONE,
 };
 
-const getDefault = () => UNDONE;
+const getDefault = () => TODO;
 
 const toggleStatus = function (currentStatus) {
   return toggle[currentStatus];

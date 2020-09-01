@@ -13,7 +13,7 @@ class TodoItems extends React.Component {
 
   render() {
     const todoList = this.props.todoList.map((todo) => {
-      const classes = `todo ${todo.status}`;
+      const classes = `task ${todo.status}`;
       return (
         <div key={todo.id} className={classes}>
           <div></div>

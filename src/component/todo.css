@@ -1,10 +1,10 @@
-.todo {
+.task {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 20px;
 }
 
-.todo > div {
+.task > div {
   width: 14px;
   height: 18px;
   margin-right: 6px;
@@ -18,19 +18,19 @@
   background-color: mediumseagreen;
 }
 
-.working {
+.doing {
   text-decoration: none;
 }
 
-.working > div {
+.doing > div {
   background-color: orange;
 }
 
-.undone {
+.todo {
   text-decoration: none;
 }
 
-.undone > div {
+.todo > div {
   background-color: lightblue;
 }
 

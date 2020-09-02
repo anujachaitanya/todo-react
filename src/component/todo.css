@@ -4,7 +4,7 @@
   margin-bottom: 20px;
 }
 
-.task > div {
+.indicator {
   width: 14px;
   height: 18px;
   margin-right: 6px;
@@ -14,7 +14,7 @@
   text-decoration: line-through;
 }
 
-.done > div {
+.done > .indicator {
   background-color: mediumseagreen;
 }
 
@@ -22,7 +22,7 @@
   text-decoration: none;
 }
 
-.doing > div {
+.doing > .indicator {
   background-color: orange;
 }
 
@@ -30,7 +30,7 @@
   text-decoration: none;
 }
 
-.todo > div {
+.todo > .indicator {
   background-color: lightblue;
 }
 

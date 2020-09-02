@@ -2,36 +2,31 @@ import React from 'react';
 import Input from './Input';
 import TodoItems from './TodoItems';
 import Heading from './Heading';
-import './todo.css';
 import { getDefault, toggleStatus } from './toggleStatus';
+import './todo.css';
 
 class Todo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { todo: [], lastId: 0, heading: 'TODO' };
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { todo: [], heading: 'Todo', lastId: 0 };
+    this.addTodo = this.addTodo.bind(this);
+    this.updateTodoStatus = this.updateStatus.bind(this);
     this.updateHeading = this.updateHeading.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  updateHeading(heading) {
-    console.log(heading);
-    this.setState({ heading });
-  }
-
-  handleKeyPress(todoText) {
+  addTodo(todoText) {
     const todo = this.state.todo.slice();
     todo.push({
       text: todoText,
       status: getDefault(),
-      id: this.state.lastId,
+      id: this.state.lastId++,
     });
-    this.state.lastId++;
     this.setState({ todo });
   }
 
-  handleClick(todoId) {
-    const todoList = this.state.todo.slice();
+  updateStatus(todoId) {
+    const todoList = [...this.state.todo];
     todoList.forEach((todo) => {
       if (todo.id === +todoId) {
         todo.status = toggleStatus(todo.status);
@@ -40,18 +35,30 @@ class Todo extends React.Component {
     this.setState({ todo: todoList });
   }
 
+  updateHeading(heading) {
+    this.setState({ heading });
+  }
+
+  deleteItem(todoId) {
+    const todoList = this.state.todo.filter((todo) => todo.id !== +todoId);
+    this.setState({ todo: todoList });
+  }
+
   render() {
     return (
       <div className="todo-box">
         <Heading
-          updateHeading={this.updateHeading}
           heading={this.state.heading}
+          updateHeading={this.updateHeading}
         />
-        <TodoItems todoList={this.state.todo} onClick={this.handleClick} />
-        <Input onKeyPress={this.handleKeyPress} />
+        <TodoItems
+          todoList={this.state.todo}
+          updateStatus={this.updateStatus}
+          deleteItem={this.deleteItem}
+        />
+        <Input onKeyPress={this.addTodo} />
       </div>
     );
   }
 }
-
 export default Todo;

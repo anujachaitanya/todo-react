@@ -7,9 +7,7 @@ const Delete = function (props) {
       src={deleteIcon}
       alt="delete icon"
       className="icon"
-      onClick={() => {
-        props.delete(props.id);
-      }}
+      onClick={props.delete}
     />
   );
 };

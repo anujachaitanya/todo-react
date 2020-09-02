@@ -26,7 +26,11 @@ class TodoItem extends React.Component {
         <span className="todoText" id={id} onClick={this.handleClick}>
           {text}
         </span>
-        <Delete delete={this.delete} id={id} />
+        <Delete
+          delete={() => {
+            this.delete(id);
+          }}
+        />
       </div>
     );
   }

@@ -13,6 +13,7 @@ class Todo extends React.Component {
     this.updateStatus = this.updateStatus.bind(this);
     this.updateHeading = this.updateHeading.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.deleteAllItems = this.deleteAllItems.bind(this);
   }
 
   addTodo(todoText) {
@@ -44,12 +45,17 @@ class Todo extends React.Component {
     this.setState({ todo: todoList });
   }
 
+  deleteAllItems() {
+    this.setState({ todo: [], heading: 'Todo' });
+  }
+
   render() {
     return (
       <div className="todo-box">
         <Heading
           heading={this.state.heading}
           updateHeading={this.updateHeading}
+          deleteAllItems={this.deleteAllItems}
         />
         <TodoItems
           todoList={this.state.todo}

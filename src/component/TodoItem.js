@@ -7,8 +7,8 @@ class TodoItem extends React.Component {
     this.state = { isDeleteIconVisible: false };
     this.handleClick = this.handleClick.bind(this);
     this.delete = this.delete.bind(this);
-    this.showDeleteIcon = this.showDeleteIcon.bind(this);
-    this.hideDeleteIcon = this.hideDeleteIcon.bind(this);
+    this.showDelete = this.showDelete.bind(this);
+    this.hideDelete = this.hideDelete.bind(this);
   }
 
   handleClick(event) {
@@ -19,11 +19,11 @@ class TodoItem extends React.Component {
     this.props.delete(id);
   }
 
-  showDeleteIcon() {
+  showDelete() {
     this.setState({ isDeleteIconVisible: true });
   }
 
-  hideDeleteIcon() {
+  hideDelete() {
     this.setState({ isDeleteIconVisible: false });
   }
 
@@ -37,8 +37,8 @@ class TodoItem extends React.Component {
     return (
       <div
         className={classes}
-        onMouseOver={this.showDeleteIcon}
-        onMouseLeave={this.hideDeleteIcon}
+        onMouseOver={this.showDelete}
+        onMouseLeave={this.hideDelete}
       >
         <div className="indicator"></div>
         <span className="todoText" id={id} onClick={this.handleClick}>

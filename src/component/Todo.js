@@ -10,7 +10,7 @@ class Todo extends React.Component {
     super(props);
     this.state = { todo: [], heading: 'Todo', lastId: 0 };
     this.addTodo = this.addTodo.bind(this);
-    this.updateTodoStatus = this.updateStatus.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
     this.updateHeading = this.updateHeading.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
   }

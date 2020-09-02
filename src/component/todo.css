@@ -50,3 +50,11 @@
   margin-inline-end: 0px;
   font-weight: bold;
 }
+
+.icon {
+  display: none;
+}
+
+.task:hover .icon {
+  display: block;
+}

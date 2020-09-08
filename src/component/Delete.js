@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeleteButton = (props) => {
+const Delete = (props) => {
   return (
     <span className={props.className} onClick={props.onClick}>
       X
@@ -8,4 +8,4 @@ const DeleteButton = (props) => {
   );
 };
 
-export default DeleteButton;
+export default Delete;

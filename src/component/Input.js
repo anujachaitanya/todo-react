@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TextInput = (props) => {
+const Input = (props) => {
   const [state, setState] = useState({ value: props.value || '' });
 
   const handleChange = (event) => {
@@ -26,4 +26,4 @@ const TextInput = (props) => {
   );
 };
 
-export default TextInput;
+export default Input;

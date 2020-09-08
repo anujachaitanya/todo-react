@@ -1,4 +1,4 @@
-const postReq = (url, data) => {
+const postRequest = (url, data) => {
   return fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -9,23 +9,23 @@ const postReq = (url, data) => {
 const getTodo = () => fetch('/api/getTodo').then((res) => res.json());
 
 const addTask = (task) => {
-  return postReq('/api/addTask', { content: task });
+  return postRequest('/api/addTask', { content: task });
 };
 
 const toggleTaskStatus = (taskId) => {
-  return postReq('/api/toggleTaskStatus', { taskId });
+  return postRequest('/api/toggleTaskStatus', { taskId });
 };
 
 const deleteTask = (taskId) => {
-  return postReq('/api/deleteTask', { taskId });
+  return postRequest('/api/deleteTask', { taskId });
 };
 
 const setTitle = (title) => {
-  return postReq('/api/setTitle', { title });
+  return postRequest('/api/setTitle', { title });
 };
 
-const resetTodo = (title) => {
-  return postReq('/api/resetTodo');
+const resetTodo = () => {
+  return postRequest('/api/resetTodo');
 };
 
 export default {

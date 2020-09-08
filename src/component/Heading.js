@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TextInput from './Input';
-import DeleteButton from './Delete';
+import Input from './Input';
+import Delete from './Delete';
 
-const TodoTitle = (props) => {
+const Heading = (props) => {
   const [isEditable, setEditable] = useState(false);
 
   const { value, onChange, deleteTodo } = props;
@@ -17,7 +17,7 @@ const TodoTitle = (props) => {
   };
 
   return isEditable ? (
-    <TextInput
+    <Input
       className="todoTitle"
       value={value}
       onEnterPress={handleTitleChange}
@@ -25,9 +25,9 @@ const TodoTitle = (props) => {
   ) : (
     <div className="todoTitle" style={{ cursor: 'pointer' }}>
       <p onClick={handleClick}>{value}</p>
-      <DeleteButton className="deleteTodoBtn" onClick={() => deleteTodo()} />
+      <Delete className="deleteTodoBtn" onClick={() => deleteTodo()} />
     </div>
   );
 };
 
-export default TodoTitle;
+export default Heading;

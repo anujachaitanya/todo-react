@@ -8,4 +8,4 @@ const getDefaultStatus = () => todo;
 
 const getNextStatus = (currentStatus) => nextStatusList[currentStatus];
 
-export { getDefaultStatus, getNextStatus };
+module.exports = { getDefaultStatus, getNextStatus };

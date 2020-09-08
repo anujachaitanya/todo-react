@@ -1,52 +1,21 @@
 import React from 'react';
-import Delete from './Delete';
+import '../task.css';
+import DeleteButton from './Delete';
 
-class TodoItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isDeleteIconVisible: false };
-    this.handleClick = this.handleClick.bind(this);
-    this.delete = this.delete.bind(this);
-    this.showDelete = this.showDelete.bind(this);
-    this.hideDelete = this.hideDelete.bind(this);
-  }
-
-  handleClick(event) {
-    this.props.updateStatus(event.target.id);
-  }
-
-  delete(id) {
-    this.props.delete(id);
-  }
-
-  showDelete() {
-    this.setState({ isDeleteIconVisible: true });
-  }
-
-  hideDelete() {
-    this.setState({ isDeleteIconVisible: false });
-  }
-
-  render() {
-    const { id, text, status } = this.props.todo;
-    const classes = `task ${status}`;
-    let deleteElement;
-    if (this.state.isDeleteIconVisible) {
-      deleteElement = <Delete delete={() => this.delete(id)} />;
-    }
-    return (
-      <div
-        className={classes}
-        onMouseOver={this.showDelete}
-        onMouseLeave={this.hideDelete}
-      >
-        <div className="indicator"></div>
-        <span className="todoText" id={id} onClick={this.handleClick}>
-          {text}
-        </span>
-        {deleteElement}
+const Task = (props) => {
+  const { id, content, status } = props.task;
+  return (
+    <div className={`taskContainer ${status}`}>
+      <div className="taskIcon"></div>
+      <div className="taskContent">
+        <p onClick={() => props.onClick(id)}>{content}</p>
+        <DeleteButton
+          className="deleteTaskBtn"
+          onClick={() => props.onDelete(id)}
+        />
       </div>
-    );
-  }
-}
-export default TodoItem;
+    </div>
+  );
+};
+
+export default Task;

@@ -1,61 +1,33 @@
-import React from 'react';
-import Input from './Input';
-import Delete from './Delete';
-import './todo.css';
+import React, { useState } from 'react';
+import TextInput from './Input';
+import DeleteButton from './Delete';
 
-class Heading extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showHeader: true, isDeleteIconVisible: false };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.showDelete = this.showDelete.bind(this);
-    this.hideDelete = this.hideDelete.bind(this);
-  }
+const TodoTitle = (props) => {
+  const [isEditable, setEditable] = useState(false);
 
-  handleClick() {
-    this.setState({ showHeader: false });
-  }
+  const { value, onChange, deleteTodo } = props;
 
-  handleKeyPress(heading) {
-    this.props.updateHeading(heading);
-    this.setState({ showHeader: true });
-  }
+  const handleClick = () => {
+    setEditable(true);
+  };
 
-  showDelete() {
-    this.setState({ isDeleteIconVisible: true });
-  }
+  const handleTitleChange = (value) => {
+    setEditable(false);
+    onChange(value);
+  };
 
-  hideDelete() {
-    this.setState({ isDeleteIconVisible: false });
-  }
+  return isEditable ? (
+    <TextInput
+      className="todoTitle"
+      value={value}
+      onEnterPress={handleTitleChange}
+    />
+  ) : (
+    <div className="todoTitle" style={{ cursor: 'pointer' }}>
+      <p onClick={handleClick}>{value}</p>
+      <DeleteButton className="deleteTodoBtn" onClick={() => deleteTodo()} />
+    </div>
+  );
+};
 
-  render() {
-    const deleteIcon = this.state.isDeleteIconVisible ? (
-      <Delete delete={this.props.deleteAllItems} />
-    ) : (
-      ''
-    );
-    if (this.state.showHeader) {
-      return (
-        <div
-          className="task"
-          onMouseOver={this.showDelete}
-          onMouseLeave={this.hideDelete}
-        >
-          <h2 onClick={this.handleClick}>{this.props.heading}</h2>
-          {deleteIcon}
-        </div>
-      );
-    }
-    return (
-      <Input
-        value={this.props.heading}
-        onKeyPress={this.handleKeyPress}
-        className="heading-input"
-      />
-    );
-  }
-}
-
-export default Heading;
+export default TodoTitle;

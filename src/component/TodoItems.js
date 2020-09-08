@@ -1,18 +1,14 @@
 import React from 'react';
-import TodoItem from './TodoItem';
-import './todo.css';
+import Task from './TodoItem';
 
-const TodoItems = function (props) {
-  const todoList = props.todoList.map((todo) => {
+const TaskList = function (props) {
+  const { tasks, onClick, onDelete } = props;
+  const taskList = tasks.map((task) => {
     return (
-      <TodoItem
-        delete={props.deleteItem}
-        todo={todo}
-        updateStatus={props.updateStatus}
-        key={todo.id}
-      />
+      <Task task={task} key={task.id} onClick={onClick} onDelete={onDelete} />
     );
   });
-  return <div>{todoList}</div>;
+  return <div>{taskList}</div>;
 };
-export default TodoItems;
+
+export default TaskList;

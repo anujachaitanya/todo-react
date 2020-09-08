@@ -1,8 +1,11 @@
-import deleteIcon from './delete.svg';
 import React from 'react';
 
-const Delete = function (props) {
-  return <img src={deleteIcon} alt="delete icon" onClick={props.delete} />;
+const DeleteButton = (props) => {
+  return (
+    <span className={props.className} onClick={props.onClick}>
+      X
+    </span>
+  );
 };
 
-export default Delete;
+export default DeleteButton;

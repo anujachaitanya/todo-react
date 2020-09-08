@@ -1,70 +1,53 @@
-import React from 'react';
-import Input from './Input';
-import TodoItems from './TodoItems';
-import Heading from './Heading';
-import { getDefault, toggleStatus } from './toggleStatus';
-import './todo.css';
+import React, { useState, useEffect } from 'react';
+import TextInput from './Input';
+import TaskList from './TodoItems';
+import TodoTitle from './Heading';
+import requestApi from './TodoApi';
 
-class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { todo: [], heading: 'Todo', lastId: 0 };
-    this.addTodo = this.addTodo.bind(this);
-    this.updateStatus = this.updateStatus.bind(this);
-    this.updateHeading = this.updateHeading.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.deleteAllItems = this.deleteAllItems.bind(this);
-  }
+const Todo = (props) => {
+  const [todo, setTodo] = useState({ title: '', tasks: [], lastTaskId: 0 });
 
-  addTodo(todoText) {
-    const todo = this.state.todo.slice();
-    todo.push({
-      text: todoText,
-      status: getDefault(),
-      id: this.state.lastId++,
-    });
-    this.setState({ todo });
-  }
+  const updateTodo = () => requestApi.getTodo().then(setTodo);
 
-  updateStatus(todoId) {
-    const todoList = [...this.state.todo];
-    todoList.forEach((todo) => {
-      if (todo.id === +todoId) {
-        todo.status = toggleStatus(todo.status);
-      }
-    });
-    this.setState({ todo: todoList });
-  }
+  const toggleTaskStatus = (taskId) => {
+    requestApi.toggleTaskStatus(taskId).then(updateTodo);
+  };
 
-  updateHeading(heading) {
-    this.setState({ heading });
-  }
+  useEffect(updateTodo, []);
 
-  deleteItem(todoId) {
-    const todoList = this.state.todo.filter((todo) => todo.id !== +todoId);
-    this.setState({ todo: todoList });
-  }
+  const addTask = (content) => {
+    requestApi.addTask(content).then(updateTodo);
+  };
 
-  deleteAllItems() {
-    this.setState({ todo: [], heading: 'Todo' });
-  }
+  const deleteTask = (taskId) => {
+    requestApi.deleteTask(taskId).then(updateTodo);
+  };
 
-  render() {
-    return (
-      <div className="todo-box">
-        <Heading
-          heading={this.state.heading}
-          updateHeading={this.updateHeading}
-          deleteAllItems={this.deleteAllItems}
+  const setTitle = (title) => {
+    requestApi.setTitle(title).then(updateTodo);
+  };
+
+  const deleteTodo = () => {
+    requestApi.resetTodo().then(updateTodo);
+  };
+
+  return (
+    <div style={{ margin: '10em', width: '20%' }}>
+      <div>
+        <TodoTitle
+          value={todo.title}
+          onChange={setTitle}
+          deleteTodo={deleteTodo}
         />
-        <TodoItems
-          todoList={this.state.todo}
-          updateStatus={this.updateStatus}
-          deleteItem={this.deleteItem}
-        />
-        <Input onKeyPress={this.addTodo} />
       </div>
-    );
-  }
-}
+      <TaskList
+        tasks={todo.tasks}
+        onClick={toggleTaskStatus}
+        onDelete={deleteTask}
+      />
+      <br />
+      <TextInput onEnterPress={addTask} className="taskInput" />
+    </div>
+  );
+};
 export default Todo;
